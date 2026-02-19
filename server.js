@@ -35,12 +35,12 @@ app.use("/api", limiter);
    CORS Configuration
 ========================= */
 
-// app.use(
-//   cors({
-//     origin: process.env.CLIENT_URL,
-//     credentials: true, // Allow cookies
-//   }),
-// );
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL,
+    credentials: true, // Allow cookies
+  }),
+);
 
 /* =========================
    Body & Cookie Parsing

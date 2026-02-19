@@ -5,32 +5,58 @@ import generateToken from "../utils/generateToken.js";
  * @desc Register User
  * @route POST /api/auth/register
  */
+
 export const registerUser = async (req, res, next) => {
   try {
-    const { name, email, password } = req.body;
+    const {
+      name,
+      email,
+      password,
+      phoneNumber,
+      category,
+      referralType,
+      clientProfession,
+      propertyType,
+      amenities,
+      budgetRange,
+      clientDetails,
+    } = req.body;
 
-    if (!name || !email || !password) {
-      return res.status(400).json({ message: "All fields are required" });
-    }
-
-    const userExists = await User.findOne({ email });
+    const userExists = await User.findOne({
+      $or: [{ email }, { phoneNumber }],
+    });
 
     if (userExists) {
-      return res.status(400).json({ message: "User already exists" });
+      return res.status(400).json({
+        message: "User already exists with email or phone",
+      });
     }
 
     const user = await User.create({
       name,
       email,
       password,
+      phoneNumber,
+      category,
+      referralType,
+      clientProfession,
+      propertyType,
+      amenities,
+      budgetRange,
+      clientDetails,
     });
 
     generateToken(res, user._id);
 
     res.status(201).json({
-      _id: user._id,
-      name: user.name,
-      email: user.email,
+      success: true,
+      user: {
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        phoneNumber: user.phoneNumber,
+        category: user.category,
+      },
     });
   } catch (error) {
     next(error);
