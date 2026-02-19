@@ -33,39 +33,8 @@ const userSchema = new mongoose.Schema(
 
     category: {
       type: String,
-      enum: ["user", "agent", "admin"],
+      enum: ["pg-hostel", "gated-community", "college"],
       default: "user",
-    },
-
-    // 🏠 Referral/Profile fields
-    referralType: {
-      type: String,
-      required: true,
-    },
-
-    clientProfession: {
-      type: String,
-      required: true,
-    },
-
-    propertyType: {
-      type: String,
-      required: true,
-    },
-
-    amenities: [
-      {
-        type: String,
-      },
-    ],
-
-    budgetRange: {
-      type: String,
-    },
-
-    clientDetails: {
-      type: String,
-      required: true,
     },
   },
   { timestamps: true },

@@ -9,15 +9,5 @@ export const registerSchema = z.object({
 
   phoneNumber: z.string().regex(/^[0-9]{10}$/, "Invalid phone number"),
 
-  category: z.enum(["user", "agent", "admin"]).optional(),
-
-  referralType: z.string().min(1),
-  clientProfession: z.string().min(1),
-  propertyType: z.string().min(1),
-
-  amenities: z.array(z.string()).optional(),
-
-  budgetRange: z.string().optional(),
-
-  clientDetails: z.string().min(5),
+  category: z.enum(["pg-hostel", "gated-community", "college"]).optional(),
 });
